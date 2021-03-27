@@ -9,7 +9,7 @@ const table = {
 
 const API_ENDPOINT = 'https://opentdb.com/api.php?'
 
-const url = ''
+const url = 'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple'
 
 const tempurl = 'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple'
 
@@ -24,6 +24,27 @@ const AppProvider = ({ children }) => {
   const [error, setError] = useState(false)
    
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const fetchQuestions = async (url) => {
+    setLoading(true)
+    setWaiting(false)
+    const response = await axios(url).catch((err) => console.log(err))
+    if (response) {
+      const data = response.data.results
+      if (data.length > 0) {
+        setQuestions(data)
+        setLoading(false)
+        setWaiting(false)
+        setError(false)
+      }
+    } else {
+      setWaiting(true)
+    }
+  }
+
+  useEffect(() => {
+    fetchQuestions(tempurl)
+  }, [])
 
   return <AppContext.Provider value={{loading, waiting, questions, index, correct, error, isModalOpen}}>{children}</AppContext.Provider>
 }
