@@ -11,10 +11,21 @@ const API_ENDPOINT = 'https://opentdb.com/api.php?'
 
 const url = ''
 
+const tempurl = 'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple'
+
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
-  return <AppContext.Provider value='hello'>{children}</AppContext.Provider>
+  const [loading, setLoading] = useState(false)
+  const [waiting, setWaiting] = useState(true)
+  const [questions, setQuestions] = useState([])
+  const [index, setIndex] = useState(0)
+  const [correct, setCorrect] = useState(0)
+  const [error, setError] = useState(false)
+   
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  return <AppContext.Provider value={{loading, waiting, questions, index, correct, error, isModalOpen}}>{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {
