@@ -4,4 +4,4 @@
 - Run 'npm install && npm start'
 - explore the app or 
 
-Check it out here : https://react-quiz.netlify.com
+Check it out here : https://react-quiz1.netlify.app
