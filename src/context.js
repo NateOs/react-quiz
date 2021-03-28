@@ -46,7 +46,7 @@ const AppProvider = ({ children }) => {
     if (index < questions.length - 1) {
       setIndex(index + 1)
     } else if (index >= questions.length - 1) {
-      console.log('done')
+      openModal()
     }
   }
 
@@ -54,13 +54,24 @@ const AppProvider = ({ children }) => {
     if (value) {
       setCorrect(correct + 1)
     }
+    nextQuestion()
+  }
+
+  const openModal = () => {
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setWaiting(true)
+    setCorrect(0)
+    setIsModalOpen(false)
   }
 
   useEffect(() => {
     fetchQuestions(tempurl)
   }, [])
 
-  return <AppContext.Provider value={{loading, waiting, questions, index, correct, error, isModalOpen, nextQuestion, checkAnswer}}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={{loading, waiting, questions, index, correct, error, isModalOpen, nextQuestion, checkAnswer, closeModal}}>{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {

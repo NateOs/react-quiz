@@ -18,23 +18,25 @@ function App() {
   const answers = [...incorrect_answers, correct_answer] 
   
   return (
-    <section className="quiz">
-      <p className="correct-answers">
-        correct answers : {correct}/{index + 1}
-      </p>
-      <article className="container">
-        <h2 dangerouslySetInnerHTML={{ __html: question }}/>
-        <div className='btn-container'>
-          {answers.map((answer, index) => {
-            return (
-              <button key={index} className='answer-btn' onClick={() => {checkAnswer(answer === correct_answer)}} dangerouslySetInnerHTML={{__html: answer}}/>
-            )
-          })}
-        </div>
-      </article>
-      <button className='next-question' onClick={() => nextQuestion()}>next question</button>
-
-    </section>
+    <main>
+    <Modal />
+      <section className="quiz">
+        <p className="correct-answers">
+          correct answers : {correct}/{index + 1}
+        </p>
+        <article className="container">
+          <h2 dangerouslySetInnerHTML={{ __html: question }}/>
+          <div className='btn-container'>
+            {answers.map((answer, index) => {
+              return (
+                <button key={index} className='answer-btn' onClick={() => {checkAnswer(answer === correct_answer)}} dangerouslySetInnerHTML={{__html: answer}}/>
+              )
+            })}
+          </div>      
+        </article>
+        <button className='next-question' onClick={() => nextQuestion()}>next question</button>
+      </section>
+    </main>
   )
 }
 
